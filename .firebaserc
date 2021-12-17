@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "cryptosights"
+  },
+  "targets": {
+    "cryptosights": {
+      "hosting": {
+        "crypto-bi": [
+          "cryptosights"
+        ]
+      }
+    }
+  }
+}

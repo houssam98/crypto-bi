@@ -1,0 +1,49 @@
+@import "src/styles/variables.scss";
+
+.app-header {
+  width: 100%;
+  background-color: $primary;
+  box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+  height: 55px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__logo {
+    line-height: 0;
+    padding-left: 24px;
+    cursor: pointer;
+    outline: 0;
+    margin: 0;
+
+    img {
+      width: 30px;
+      @media screen and (max-width: 470px) {
+        width: 175px;
+      }
+    }
+
+    &:hover {
+      opacity: 0.6;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  .logoText {
+    font-family: 'Paytone One', sans-serif;
+    text-transform: uppercase;
+    font-size: 23px;
+    margin-left: 1rem;
+    color: #fff;
+  }
+
+  .menu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
