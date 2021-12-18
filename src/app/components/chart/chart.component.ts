@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
@@ -12,7 +11,7 @@ import { Chart, registerables } from 'chart.js';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })
-export class ChartComponent implements OnInit, AfterViewInit {
+export class ChartComponent implements AfterViewInit {
   @ViewChild('myCanvas', { static: false })
   canvasElement!: ElementRef;
 
@@ -23,8 +22,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
   constructor() {
     Chart.register(...registerables);
   }
-
-  ngOnInit() {}
 
   ngAfterViewInit() {
     if (this.chartJS) {

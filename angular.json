@@ -113,9 +113,21 @@
             "firebaseProject": "cryptosights",
             "firebaseHostingSite": "cryptosights"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "crypto-bi"
+  "defaultProject": "crypto-bi",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
