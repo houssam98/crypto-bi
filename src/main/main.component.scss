@@ -1,0 +1,61 @@
+.crypto-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  
+    .mat-icon {
+      margin-right: 8px;
+    }
+  }
+  
+  .crypto-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "segoe ui", Roboto,
+      Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    margin: 0 2rem;
+  
+    .crypto-container {
+      display: flex;
+      flex: 0 0 45%;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(201, 209, 217, 0.659);
+  
+      &__exchanges {
+        border: none;
+  
+        p:first-child {
+          flex: calc(5% + 37px);
+        }
+        p {
+          flex: 1;
+          margin: 0;
+        }
+      }
+  
+      .crypto-icon {
+        margin-right: 7px;
+        width: 30px;
+      }
+  
+      .crypto-name {
+        flex: 5%;
+      }
+  
+      .crypto-price {
+        flex: 1;
+      }
+    }
+  }
+  
+  .refresh-btn {
+  }
+  

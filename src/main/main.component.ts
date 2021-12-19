@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
@@ -11,14 +12,17 @@ interface MarketData {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'main-root',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class MainComponent implements OnInit {
   title = 'crypto-bi';
   marketData$!: Observable<MarketData[]>;
   keys!: string[];
+  selectedBase = 'USDT';
+  baseCurrencies = ['USD', 'USDT', 'USDC', 'BTC', 'ETH', 'BUSD', 'BNB'];
+  refreshing = false;
 
   constructor(
     private fns: AngularFireFunctions,
@@ -30,19 +34,26 @@ export class AppComponent implements OnInit {
       .collection<MarketData>('prices', (ref) => ref.orderBy('name'))
       .valueChanges()
       .pipe(
-        tap(
-          (data) =>
-            (this.keys = Object.keys(data[0].prices).sort((a, b) =>
-              a.localeCompare(b)
-            ))
-        )
+        tap((data) => {
+          this.keys = Object.keys(data[0].prices).sort((a, b) =>
+            a.localeCompare(b)
+          );
+        })
       );
     this.marketData$.subscribe(console.log);
   }
 
   refreshPrices() {
-    console.log(this.keys);
-    const fn = this.fns.httpsCallable('getLatest');
-    fn({}).subscribe(console.log);
+    this.refreshing = true;
+    const fn = this.fns.httpsCallable('refreshData');
+    fn({}).subscribe(res => this.refreshing = false);
+  }
+
+  getNextUpdate(date: Date) {
+    return new Date(date.getTime() + 5 * 60000);
+  }
+
+  setBase(ev: any) {
+    this.selectedBase = ev.value;
   }
 }

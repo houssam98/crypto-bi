@@ -1,0 +1,54 @@
+<main-header></main-header>
+<div *ngIf="marketData$ | async as market" class="crypto-header">
+  <button
+    mat-raised-button
+    color="primary"
+    class="refresh-btn"
+    (click)="refreshPrices()"
+  >
+    <mat-icon>autorenew</mat-icon
+    >{{ refreshing ? "Refreshing..." : "Refresh prices" }}
+  </button>
+  <div>
+    <p>
+      Last updated:
+      {{ market[0].modified.toDate() | date: "MMM d, y, h:mm:ss a" }}
+    </p>
+    <p>
+      Next update:
+      {{
+        getNextUpdate(market[0].modified.toDate()) | date: "MMM d, y, h:mm:ss a"
+      }}
+    </p>
+  </div>
+  <mat-form-field>
+    <mat-label>Base asset</mat-label>
+    <mat-select [(value)]="selectedBase" (selectionChange)="setBase($event)">
+      <mat-option *ngFor="let currency of baseCurrencies" [value]="currency">
+        {{ currency }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div *ngIf="marketData$ | async as market" class="crypto-wrapper">
+  <div class="crypto-container crypto-container__exchanges">
+    <p></p>
+    <p *ngFor="let exchange of market">{{ exchange?.id }}</p>
+  </div>
+  <div class="crypto-container" *ngFor="let key of keys">
+    <img
+      class="crypto-icon"
+      [src]="
+        'https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/svg/color/' +
+        (key | lowercase) +
+        '.svg'
+      "
+    />
+    <div class="crypto-name">{{ key }}</div>
+
+    <div class="crypto-price" *ngFor="let exchange of market">
+      {{ exchange?.prices[key][selectedBase] | number: "1.1-3" }}
+    </div>
+  </div>
+</div>
